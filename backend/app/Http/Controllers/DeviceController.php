@@ -36,10 +36,12 @@ class DeviceController extends Controller
 
         if ($validator->fails()) {
             $deviceParameter = Device::getDeviceByField('uid', $request->uid);
-            return [
-                'register' => 'OK',
-                'api_token' => $deviceParameter->api_token
-            ];
+            if($deviceParameter->appId == $request->appId){
+                return [
+                    'register' => 'OK',
+                    'api_token' => $deviceParameter->api_token
+                ];
+            }
         }
         $clientToken = sha1(time());
         $request->request->add(
