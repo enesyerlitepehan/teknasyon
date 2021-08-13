@@ -49,12 +49,9 @@ class SyncDeviceCommand extends Command
             ->get();
         foreach($expireDevices as $expireDevice){
             Log::debug('expireDevice here: ');
-            //error_log('test: ' . json_encode($expireDevice, true));
             $response = json_decode(AuthenticateForDevice::authenticateForSchedule($expireDevice->receipt), true);
-            //Rate-limit
-            error_log('$response: ' . print_r($response, true));
+            //Rate-limit - If the status is false, it means rate limit.
             if($response['status'] === 'true'){
-                error_log('$response1: ' . print_r($response, true));
                 DB::table('purchases')
                     ->where('receipt', $expireDevice->receipt)
                     ->update(['expire_date' => $response['expire_date']]);
@@ -62,7 +59,6 @@ class SyncDeviceCommand extends Command
 
         }
         Log::debug('expireDevice here: ');
-        error_log('test: ' . json_encode($expireDevices, true));
         return 0;
     }
 }

@@ -53,14 +53,11 @@ class Device extends Model
     {
         $device = static::query()->where('id', $id)->first();
         $remove = Device::find($id)->delete();
-        error_log('remove: ' . print_r($remove, true));
         event(new \App\Events\Canceled($device));
         return $remove;
     }
 
     public static function updateDevice($uid, $subscriptionState){
-        error_log('$uid: ' . $uid);
-        error_log('$subscriptionId: ' . $subscriptionState);
         $device = static::query()->where('uid', $uid)->first();
         $update = DB::table('devices')->where('uid', $uid)->update(['subscription_state' => $subscriptionState]);
         event(new \App\Events\Renewed($device));

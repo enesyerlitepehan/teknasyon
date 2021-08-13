@@ -27,7 +27,6 @@ class RenewedListener
     public function handle(Renewed $event)
     {
         Log::info('Renewed Listener!');
-        error_log('event here: ' . json_encode($event, true));
         ThirdPartyApi::thirdPart($event->renewed->id, $event->renewed->appId, 'Renewed');
     }
 }

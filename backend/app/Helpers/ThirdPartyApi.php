@@ -11,9 +11,6 @@ class thirdPartyApi
     public static function thirdPart($deviceId, $appId, $eventType)
     {
         Log::info('# ThirdPart started');
-        error_log('deviceId ' . $deviceId);
-        error_log('$appId ' . $appId);
-        error_log('$eventType ' . $eventType);
         Http::fake(function (Request $request) {
             return Http::response(['status' => 'true'], 200, ['Headers']);
         });

@@ -30,7 +30,7 @@ class AuthenticateForDevice
         Http::fake(function (Request $request) {
             $date = now('-6')->format('Y-m-d H:i:s');
             if (substr($request['receipt'], -2) % 6 === 0) {
-                return Http::response(['status' => 'false'], 200, ['Headers']);
+                return Http::response(['status' => 'false', 'rate_limit' => 'true'], 200, ['Headers']);
             } else {
                 return Http::response(['status' => 'true', 'expire_date' => $date], 200, ['Headers']);
             }
