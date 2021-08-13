@@ -12,7 +12,7 @@ Docker installation is complete.
 
 Performans - I've added an index, but I haven't done a limit test.
 
-API [ MEDIUM ] OK
+API [ MEDIUM ] OK \n
 Worker [ MEDIUM ] OK
 Callback [ BASIC ] OK
 Performans ( DB, API, Worker) / Race Condition [ HIGH ] -Could be partly, I'm not sure. 
