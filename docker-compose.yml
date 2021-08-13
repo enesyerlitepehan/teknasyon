@@ -1,0 +1,26 @@
+services:
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+    networks:
+      - backend
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-db:/var/lib/mysql:rw
+
+  backend:
+    build: ./backend
+    ports:
+      - 8080:80
+    depends_on:
+      - mysql
+    volumes:
+      - ./backend:/var/www/teknasyon
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+
+volumes:
+  mysql-db:
+networks:
+  backend:
